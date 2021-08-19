@@ -1,2 +1,33 @@
 {% extends 'base.html' %} {% block title %}Home{% endblock %} {% block content
-%} Hello World {% endblock %}
+%} Hello World
+
+<style>
+	figure {
+		text-align: center;
+	}
+</style>
+<div id="quote">
+	<h4>Today's Quote</h4>
+	<figure>
+		<blockquote class="blockquote">
+			<h3 id="actual_quote"></h3>
+		</blockquote>
+		<figcaption class="blockquote-footer">
+			<cite title="Source Title" id="author"></cite>
+		</figcaption>
+	</figure>
+</div>
+
+<script>
+	const TARGETURL = "https://quotes.rest/qod/"
+	const targetHeader = document.getElementById("actual_quote")
+	const author = document.getElementById("author")
+	fetch(TARGETURL)
+		.then((res) => res.json())
+		.then((data) => {
+			targetHeader.innerText = `${data.contents.quotes[0].quote}`
+			author.innerText = `${data.contents.quotes[0].author}`
+		})
+		.catch((error) => console.log(error))
+</script>
+{% endblock %}
