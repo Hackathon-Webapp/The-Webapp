@@ -20,6 +20,7 @@
 	</head>
 	<body>
 		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 			header {
 				box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.4);
 				z-index: 10;
@@ -30,9 +31,14 @@
 				--main-bg-color: linear-gradient(120deg, #D6EFF6 20%, #C2D5A8 65%);
 			}
 		</style>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+		<nav class="navbar navbar-expand-lg navbar navbar-light" style="font-family: Poppins;background-color: #afdefa;">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">{Name}</a>
+				<a class="navbar-brand" href="#">
+					<img 
+					style="width: 60px; height: 60px;"
+					src="https://sdl-stickershop.line.naver.jp/products/0/0/1/1380130/android/stickers/14870493.png;compress=true">
+					{Name}
+				</a>
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -53,6 +59,12 @@
 							<a class="nav-link" href="todo">To-Do</a>
 						</li>
 						<li class="nav-item">
+							<a class="nav-link" href="resources">Resources</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="relaxation">Relax</a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link" href="img_pdf">Img<span>&rarr;</span>PDF</a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="sign-up">Sign Up</a></li>
@@ -60,6 +72,8 @@
 				</div>
 			</div>
 		</nav>
+
+
 		{% with messages = get_flashed_messages(with_categories=true) %}
 		{% if messages %}
 		{% for category, message in messages %}
