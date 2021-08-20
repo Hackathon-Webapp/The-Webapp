@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block title %}Todo{% endblock %} {% block content
+%}
+<h1 align="center">Todos</h1>
+<ul class="list-group list-group-flush" id="todos">
+	{% for todo in user.todos %}
+	<li class="list-group-item">
+		{{ todo.data }}
+		<button
+			type="button"
+			class="close"
+			data-bs-dismiss="alert"
+			onClick="deleteTodo({{ todo.id }})"
+		></button>
+	</li>
+	{% endfor %}
+</ul>
+<form method="POST">
+	<textarea class="form-control" name="todo" id="todo"></textarea>
+	<div align="center">
+		<button type="submit" class="btn btn-primary">Add Todo</button>
+	</div>
+</form>
+<script
+	type="text/javascript"
+	src="{{ url_for('static', filename='index.js') }}"
+></script>
+{% endblock %}
