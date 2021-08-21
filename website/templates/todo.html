@@ -1,5 +1,15 @@
 {% extends 'base.html' %} {% block title %}Todo{% endblock %} {% block content
 %}
+<style>
+	#delbtn {
+		background: #ff6f47;
+		color: white;
+		border: none;
+		padding: 1rem;
+		cursor: pointer;
+		font-size: 1rem;
+	}
+</style>
 <h1 align="center">Todos</h1>
 <ul class="list-group list-group-flush" id="todos">
 	{% for todo in user.todos %}
@@ -8,9 +18,12 @@
 		<button
 			type="button"
 			class="close"
+			id="delbtn"
 			data-bs-dismiss="alert"
 			onClick="deleteTodo({{ todo.id }})"
-		></button>
+		>
+			<i align="end" class="fas fa-trash"></i>
+		</button>
 	</li>
 	{% endfor %}
 </ul>
@@ -20,8 +33,4 @@
 		<button type="submit" class="btn btn-primary">Add Todo</button>
 	</div>
 </form>
-<script
-	type="text/javascript"
-	src="{{ url_for('static', filename='index.js') }}"
-></script>
 {% endblock %}
