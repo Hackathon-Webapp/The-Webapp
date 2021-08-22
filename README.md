@@ -2,7 +2,7 @@
 
 ## Checklist of Things
 
-- [ ] Sign Up and Login System
+- [x] Sign Up and Login System
 - [ ] Motivational/Relaxing Things
     - [x] QOTD
     - [ ] Calming Music
