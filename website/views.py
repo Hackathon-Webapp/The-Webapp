@@ -49,9 +49,9 @@ def relax():
 def timer():
     return render_template('timer.html', user=current_user)
 
-@views.route('/resources')
-def resources():
-    return render_template('resources.html', user=current_user)
+@views.route('/minigames')
+def minigames():
+    return render_template('minigames.html', user=current_user)
 
 @views.route('/ebooks')
 def ebooks():
@@ -69,13 +69,6 @@ def ebooks7():
 def ebooks8():
     return render_template('ebooks/ebooks8.html', user=current_user)
 
-@views.route('/images')
-def images():
-    return render_template('imgs&diagrams.html', user=current_user)
-
-@views.route('/audio')
-def audios():
-    return render_template('audios.html', user=current_user)
 
 @views.route('/chat', methods=['GET', 'POST'])
 @login_required
