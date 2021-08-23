@@ -1,0 +1,97 @@
+{% extends 'base.html' %} {% block title %}Chat{% endblock %} {% block content
+%}
+<style>
+	:root {
+		--dark-color-a: #a5d5d5;
+		--dark-color-b: #bad5f0;
+		--light-color: #e6e9ff;
+		--success-color: #5cb85c;
+		--error-color: #d9534f;
+	}
+	/* Join Page */
+	.join-container {
+		background: var(--dark-color-a);
+		max-width: 500px;
+		margin: 80px auto;
+		color: rgb(215, 215, 215);
+	}
+
+	.join-header {
+		text-align: center;
+		padding: 20px;
+		background: var(--dark-color-a);
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+
+	#username {
+		background: #a5d5d5;
+	}
+	.join-main {
+		padding: 30px 40px;
+		background: var(--dark-color-b);
+	}
+
+	.join-main p {
+		margin-bottom: 20px;
+	}
+
+	.join-main .form-control {
+		margin-bottom: 20px;
+	}
+
+	.join-main label {
+		display: block;
+		margin-bottom: 5px;
+	}
+
+	.join-main input[type="text"] {
+		font-size: 16px;
+		padding: 5px;
+		height: 40px;
+		width: 100%;
+	}
+
+	.join-main select {
+		font-size: 16px;
+		padding: 5px;
+		height: 40px;
+		width: 100%;
+	}
+
+	.join-main .btn {
+		margin-top: 20px;
+		width: 100%;
+	}
+
+	@media (max-width: 700px) {
+		.chat-main {
+			display: block;
+		}
+
+		.chat-sidebar {
+			display: none;
+		}
+	}
+</style>
+<div class="join-container">
+	<header class="join-header">
+		<h1><i class="fas fa-smile"></i> ChatCord</h1>
+	</header>
+	<main class="join-main">
+		<form action="{{ url_for('views.chatting') }}">
+			<div class="form-control" id="username-box">
+				<label for="username">Username</label>
+				<input
+					type="text"
+					name="username"
+					id="username"
+					placeholder="Enter username of the person you want to chat with"
+					required
+				/>
+			</div>
+			<button type="submit" class="btn btn-lg btn-primary">Join Chat</button>
+		</form>
+	</main>
+</div>
+{% endblock %}

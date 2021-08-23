@@ -1,13 +1,12 @@
 {% extends 'base.html' %} {% block title %}Home{% endblock %} {% block content
-%} Hello World
-
+%}
 <style>
 	figure {
 		text-align: center;
 	}
 </style>
 <div id="quote">
-	<h4>Today's Quote</h4>
+	<h4>Hello {{ username }}</h4>
 	<figure>
 		<blockquote class="blockquote">
 			<h3 id="actual_quote"></h3>

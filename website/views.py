@@ -1,5 +1,5 @@
   
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, session, url_for
 from flask_login import login_required, current_user
 from .models import Todo
 from . import db
@@ -38,20 +38,42 @@ def delete_note():
 @views.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
-    return render_template('home.html', user=current_user)
+    username = session.get('username', None)
+    return render_template('home.html', user=current_user, username=username)
 
 
 @views.route('/resources', methods=['GET', 'POST'])
+@login_required
 def resources():
     return render_template('resources.html')
 
 @views.route('/relaxation', methods=['GET', 'POST'])
+@login_required
 def relax():
     return render_template('relax.html')
 
 @views.route('/ebooks', methods=['GET', 'POST'])
+@login_required
 def ebooks():
-    return render_template('ebooks.html')
+    return render_template('ebooks.html', user=current_user)
+
+@views.route('/chat', methods=['GET', 'POST'])
+@login_required
+def chat():
+    if request.method == 'POST':
+        other_guy = request.form['username']
+        print(other_guy)
+        session['other_guy'] = other_guy
+    else:
+        return render_template('chat.html', user=current_user)
+
+@views.route('/chatting', methods=['GET', 'POST'])
+@login_required
+def chatting():
+    username = session.get('username', None)
+    other_guy = session['other_guy']
+    print(other_guy)
+    return render_template('chatting.html', user=current_user, username=username)
 
 @views.route('/ebooks6', methods=['GET', 'POST'])
 def ebooks6():
