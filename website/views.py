@@ -40,47 +40,42 @@ def delete_note():
 def home():
     return render_template('home.html', user=current_user)
 
-
-@views.route('/resources', methods=['GET', 'POST'])
-def resources():
-    return render_template('resources.html')
-
-@views.route('/relaxation', methods=['GET', 'POST'])
+@views.route('/relaxation')
 def relax():
-    return render_template('relax.html')
+    return render_template('relax.html', user=current_user)
 
-@views.route('/ebooks', methods=['GET', 'POST'])
+@views.route('/resources')
+def resources():
+    return render_template('resources.html', user=current_user)
+
+@views.route('/ebooks')
 def ebooks():
-    return render_template('ebooks.html')
+    return render_template('ebooks.html', user=current_user)
 
-@views.route('/ebooks6', methods=['GET', 'POST'])
+@views.route('/ebooks6')
 def ebooks6():
-    return render_template('ebooks/ebooks6.html')
+    return render_template('ebooks/ebooks6.html', user=current_user)
 
-@views.route('/ebooks7', methods=['GET', 'POST'])
+@views.route('/ebooks7')
 def ebooks7():
-    return render_template('ebooks/ebooks7.html')
+    return render_template('ebooks/ebooks7.html', user=current_user)
 
-@views.route('/ebooks8', methods=['GET', 'POST'])
+@views.route('/ebooks8')
 def ebooks8():
-    return render_template('ebooks/ebooks8.html')
+    return render_template('ebooks/ebooks8.html', user=current_user)
 
-@views.route('/images', methods=['GET', 'POST'])
+@views.route('/images')
 def images():
-    return render_template('imgs&diagrams.html')
+    return render_template('imgs&diagrams.html', user=current_user)
 
-@views.route('/audio', methods=['GET', 'POST'])
+@views.route('/audio')
 def audios():
-    return render_template('audios.html')
-
-@views.route('/img_pdf', methods=['GET', 'POST'])
-def img_pdf():
-    return render_template('img_pdf.html')
+    return render_template('audios.html', user=current_user)
 
 @views.errorhandler(404)
 def page_not_found(e):
-    return render_template("404.html"), 404
+    return render_template('404.html', user=current_user), 404
 
 @views.errorhandler(500)
 def page_not_found(e):
-    return render_template("500.html"), 500
+    return render_template('500.html', user=current_user), 500
