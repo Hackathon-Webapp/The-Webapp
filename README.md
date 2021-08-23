@@ -15,3 +15,6 @@ Resources includes the PDFs of the Chapters from classes 6-8 of the Science NCER
 
 ## Relaxation 🧘‍♂️
 Play Fun Mindgames to relax after your study session and relieve stress.
+
+## Creators
+Made by Akshaj, Arshia & Taksheel from BBS 😁
