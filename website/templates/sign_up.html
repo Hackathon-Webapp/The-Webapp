@@ -6,17 +6,19 @@ content %}
 		font-weight: 450;
 	}
 	#hello-alpaca {
-		width: 80px;
-		height: 80px;
+		width: 200px;
+		height: 200px;
 		position: relative;
-		left: 695px;
+		left: 635px;
 		bottom: 75px;
+		margin-top: 3rem;
 	}
 </style>
-<br><h3 align="center">Sign Up</h3>
+<br />
+<h3 align="center">Sign Up</h3>
 <img
-	    id="hello-alpaca"
-		src="https://sdl-stickershop.line.naver.jp/products/0/0/1/1380130/android/stickers/14870486.png;compress=true"
+	id="hello-alpaca"
+	src="https://sdl-stickershop.line.naver.jp/products/0/0/1/1380130/android/stickers/14870486.png;compress=true"
 />
 <form method="POST">
 	<div class="mb-3">
@@ -47,6 +49,6 @@ content %}
 			name="password2"
 		/>
 	</div>
-	<button type="submit" class="btn btn-primary">Submit</button>
+	<button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
 </form>
 {% endblock %}

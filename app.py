@@ -4,6 +4,7 @@ from flask_login import current_user
 
 app = create_app()
 
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home/<username>', methods=['GET', 'POST'])
 def home(username):

@@ -1,8 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from flask_socketio import SocketIO, join_room, leave_room
-from flask_session import Session
 from os import path
 
 db = SQLAlchemy()
@@ -15,7 +13,6 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
 
-    Session(app)
 
     from .views import views
     from .auth import auth

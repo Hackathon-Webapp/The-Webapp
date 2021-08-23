@@ -69,27 +69,6 @@ def ebooks7():
 def ebooks8():
     return render_template('ebooks/ebooks8.html', user=current_user)
 
-
-@views.route('/chat', methods=['GET', 'POST'])
-@login_required
-def chat():
-    if request.method == 'POST':
-        a = request.form.get('username', None)
-        session['a'] = a
-        if "a" in session:
-            print('a is in session')
-        return redirect(url_for('chatting'))
-    else:
-        return render_template('chat.html', user=current_user)
-
-@views.route('/chatting')
-@login_required
-def chatting():
-    username_of_user = session['username']
-    username_of_other_guy = request.args['username']
-    print(username_of_other_guy)
-    return render_template('chatting.html', user=current_user, username=username_of_user)
-    
 @views.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html', user=current_user), 404

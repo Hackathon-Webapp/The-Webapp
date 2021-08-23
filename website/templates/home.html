@@ -1,13 +1,37 @@
 {% extends 'base.html' %} {% block title %}Home{% endblock %} {% block content
 %}
 <style>
+	@import url("https://fonts.googleapis.com/css2?family=Rampart+One&display=swap");
 	figure {
 		text-align: center;
 	}
+	.display-3 {
+		font-family: "Rampart One";
+	}
+	.container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.cards {
+		display: flex;
+		flex-direction: row;
+		align-items: inline;
+		justify-content: space-around;
+		flex-wrap: wrap;
+	}
+	.cards > div {
+		/* width: min-content;
+		height: min-content; */
+		background: #20de85;
+	}
 </style>
-<br>
+<br />
+<div class="container">
+	<p class="display-3">Hello, {{ username }} !</p>
+</div>
+<br />
 <div id="quote">
-	<h4>Hello, {{ username }} !</h4><br>
 	<figure>
 		<blockquote class="blockquote">
 			<h3 id="actual_quote"></h3>
@@ -18,24 +42,29 @@
 	</figure>
 </div>
 
-<br>
+<br />
 
-<div class="card">
-	<div class="card-body">
-	  <h5 class="card-title">Tasks</h5>
-	  <p class="card-text">Complete your pending tasks or make new To-Dos here!</p>
-	  <a href="todo" class="btn btn-primary">Go to Tasks</a>
+<div class="cards">
+	<div class="card">
+		<div class="card-header">
+			<h5 class="card-title">Tasks</h5>
+		</div>
+		<div class="card-body">
+			<p class="card-text">
+				Complete your pending tasks or make new To-Dos here!
+			</p>
+			<a href="todo" class="btn btn-primary">Go to Tasks</a>
+		</div>
 	</div>
-  </div>
-<br>
-  <div class="card">
-	<div class="card-body">
-	  <h5 class="card-title">Study</h5>
-	  <p class="card-text">Study with our Pomodoro Timer for more focus</p>
-	  <a href="ptimer" class="btn btn-primary">Let's study</a>
+	<br />
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">Study</h5>
+			<p class="card-text">Study with our Pomodoro Timer for more focus</p>
+			<a href="ptimer" class="btn btn-primary">Let's study</a>
+		</div>
 	</div>
-  </div>
-
+</div>
 <script>
 	const TARGETURL = "https://quotes.rest/qod/"
 	const targetHeader = document.getElementById("actual_quote")
