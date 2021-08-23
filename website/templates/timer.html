@@ -1,0 +1,226 @@
+{% extends 'base.html' %} {% block title %}Pomodoro Timer{% endblock %} {% block
+content %}
+
+<style>
+	@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+	body {
+		margin-top: 20px;
+		background: #222;
+	}
+	.centered {
+		margin: 0px auto;
+		text-align: center;
+	}
+	h1 {
+		color: white;
+		font-size: 45px;
+		font-family: Open Sans;
+	}
+	#time {
+		color: white;
+		font-family: Open Sans;
+		font-size: 100px;
+	}
+	#preset {
+		width: 100px;
+	}
+	#break-up {
+		color: white;
+	}
+	#break-down {
+		color: white;
+	}
+	.well {
+		background: transparent;
+		padding: 0px;
+		width: 50px;
+	}
+	#settings {
+		color: white;
+		font-family: Open Sans;
+		font-size: 24px;
+		/*   background-color: blue; */
+		width: 150px;
+		height: 110px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: inline;
+	}
+	.btn:hover {
+		color: #ddd;
+	}
+	#break-well {
+		margin: 0px 15px 0px 15px;
+	}
+	#session-well {
+		margin-bottom: 0px;
+	}
+	.btn {
+		color: white;
+	}
+	.des {
+		margin: 0px auto;
+		text-align: center;
+	}
+	.descrp {
+		display: inline;
+		margin-right: 12px;
+		margin-left: 12px;
+		color: white;
+	}
+	#info {
+		margin-top: 20px;
+	}
+</style>
+<div class="centered">
+	<h1>Pomodoro Timer</h1>
+	<div id="settings" class="centered">
+		<div id="break-well" class="well col-xs-1">
+			<div id="break-up" class="btn">+</div>
+			<!-- /break up-->
+			<div id="break">5</div>
+			<!-- /break -->
+			<div id="break-down" class="btn">-</div>
+			<!-- /break down-->
+		</div>
+		<!-- /break well-->
+		<div id="session-well" class="well col-xs-1">
+			<div id="session-up" title="Resets Timer" class="btn">+</div>
+			<!-- /session up-->
+			<div id="session">25</div>
+			<!-- /session -->
+			<div id="session-down" title="Resets Timer" class="btn">-</div>
+			<!-- /session down-->
+		</div>
+		<!-- /session well-->
+	</div>
+	<!-- /settings -->
+	<div class="des">
+		<h5 class="descrp">break</h5>
+		<h5 class="descrp">session</h5>
+	</div>
+
+	<div id="time">25:00</div>
+	<div id="controls">
+		<div class="btn btn-primary" id="play-pause">Start</div>
+		<div class="btn btn-danger" id="reset">Reset</div>
+	</div>
+	<!-- /controls -->
+
+	<script>
+		var spacebar = "play" //play pause toggle
+		var time = 1500
+		var sessionTime = 1500
+		var breakTime = 300
+		var workfun = "session" //session or break
+		var counter
+		var coffee = "work" //session break toggle
+		$(function () {
+			document.title = "Work"
+		})
+
+		$("#play-pause").on("click", function () {
+			if (spacebar == "play") {
+				$("#play-pause").html("Pause")
+				$("#play-pause").addClass("btn-info")
+				spacebar = "pause"
+				//run play function
+				counter = setInterval(timer, 1000) //run every 1 second
+			} else {
+				$("#play-pause").html("Resume")
+				$("#play-pause").removeClass("btn-info")
+				spacebar = "play"
+				clearTimeout(counter)
+			}
+		})
+
+		function timer() {
+			time -= 1
+			if (time <= -1) {
+				console.log(coffee)
+				clearInterval(counter)
+				var audio = new Audio(
+					"http://blog.tmcnet.com/blog/tom-keating/sounds/24-ring-tone-1.mp3",
+				)
+				audio.play()
+				//switch break or session
+				if (coffee == "work") {
+					console.log(">funtime")
+					window.document.title = "Break"
+					coffee = "funtime"
+					time = breakTime
+					counter = setInterval(timer, 1000)
+				} else {
+					console.log(">work")
+					window.document.title = "Work"
+					coffee = "work"
+					time = sessionTime
+					counter = setInterval(timer, 1000)
+				}
+			} else {
+				var minSec = convertTime(time)
+				$("#time").html(minSec)
+			}
+		}
+
+		// ---- Convert Time ---- //
+
+		function convertTime(time) {
+			var minutes = Math.floor(time / 60)
+			var seconds = time - minutes * 60
+			return minutes + ":" + seconds
+		}
+
+		// ---- RESET ---- //
+
+		$("#reset").on("click", function () {
+			reset()
+		})
+
+		function reset() {
+			$("#play-pause").html("Start")
+			$("#play-pause").removeClass("btn-info")
+			spacebar = "play"
+			$("#time").html(time)
+			clearTimeout(counter)
+			time = sessionTime
+			var timeMin = time / 60
+			$("#time").html(timeMin + ":00")
+		}
+
+		// ---- SETTINGS ---- //
+		$("#session-up").on("click", function () {
+			reset()
+			time += 60
+			sessionTime = time
+			sessionMin = sessionTime / 60
+			$("#session").html(sessionMin)
+			$("#time").html(sessionMin + ":00")
+		})
+		$("#session-down").on("click", function () {
+			reset()
+			if (time > 60) {
+				time -= 60
+			}
+			sessionTime = time
+			sessionMin = sessionTime / 60
+			$("#session").html(sessionMin)
+			$("#time").html(sessionMin + ":00")
+		})
+		$("#break-up").on("click", function () {
+			breakTime += 60
+			var breakMin = breakTime / 60
+			$("#break").html(breakMin)
+		})
+		$("#break-down").on("click", function () {
+			if (breakTime > 60) {
+				breakTime -= 60
+			}
+			var breakMin = breakTime / 60
+			$("#break").html(breakMin)
+		})
+		// ---- /settings ---- //
+	</script>
+	{% endblock %}
+</div>

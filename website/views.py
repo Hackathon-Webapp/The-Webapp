@@ -41,68 +41,66 @@ def home():
     username = session.get('username', None)
     return render_template('home.html', user=current_user, username=username)
 
-
-@views.route('/resources', methods=['GET', 'POST'])
-@login_required
-def resources():
-    return render_template('resources.html')
-
-@views.route('/relaxation', methods=['GET', 'POST'])
-@login_required
+@views.route('/relaxation')
 def relax():
-    return render_template('relax.html')
+    return render_template('relax.html', user=current_user)
 
-@views.route('/ebooks', methods=['GET', 'POST'])
-@login_required
+@views.route('/ptimer')
+def timer():
+    return render_template('timer.html', user=current_user)
+
+@views.route('/resources')
+def resources():
+    return render_template('resources.html', user=current_user)
+
+@views.route('/ebooks')
 def ebooks():
     return render_template('ebooks.html', user=current_user)
+
+@views.route('/ebooks6')
+def ebooks6():
+    return render_template('ebooks/ebooks6.html', user=current_user)
+
+@views.route('/ebooks7')
+def ebooks7():
+    return render_template('ebooks/ebooks7.html', user=current_user)
+
+@views.route('/ebooks8')
+def ebooks8():
+    return render_template('ebooks/ebooks8.html', user=current_user)
+
+@views.route('/images')
+def images():
+    return render_template('imgs&diagrams.html', user=current_user)
+
+@views.route('/audio')
+def audios():
+    return render_template('audios.html', user=current_user)
 
 @views.route('/chat', methods=['GET', 'POST'])
 @login_required
 def chat():
     if request.method == 'POST':
-        other_guy = request.form['username']
-        print(other_guy)
-        session['other_guy'] = other_guy
+        a = request.form.get('username', None)
+        session['a'] = a
+        if "a" in session:
+            print('a is in session')
+        return redirect(url_for('chatting'))
     else:
         return render_template('chat.html', user=current_user)
 
-@views.route('/chatting', methods=['GET', 'POST'])
+@views.route('/chatting')
 @login_required
 def chatting():
-    username = session.get('username', None)
-    other_guy = session['other_guy']
-    print(other_guy)
-    return render_template('chatting.html', user=current_user, username=username)
-
-@views.route('/ebooks6', methods=['GET', 'POST'])
-def ebooks6():
-    return render_template('ebooks/ebooks6.html')
-
-@views.route('/ebooks7', methods=['GET', 'POST'])
-def ebooks7():
-    return render_template('ebooks/ebooks7.html')
-
-@views.route('/ebooks8', methods=['GET', 'POST'])
-def ebooks8():
-    return render_template('ebooks/ebooks8.html')
-
-@views.route('/images', methods=['GET', 'POST'])
-def images():
-    return render_template('imgs&diagrams.html')
-
-@views.route('/audio', methods=['GET', 'POST'])
-def audios():
-    return render_template('audios.html')
-
-@views.route('/img_pdf', methods=['GET', 'POST'])
-def img_pdf():
-    return render_template('img_pdf.html')
-
+    username_of_user = session['username']
+    username_of_other_guy = request.args['username']
+    print(username_of_other_guy)
+    return render_template('chatting.html', user=current_user, username=username_of_user)
+    
 @views.errorhandler(404)
 def page_not_found(e):
-    return render_template("404.html"), 404
+    return render_template('404.html', user=current_user), 404
 
 @views.errorhandler(500)
 def page_not_found(e):
-    return render_template("500.html"), 500
+    return render_template('500.html', user=current_user), 500
